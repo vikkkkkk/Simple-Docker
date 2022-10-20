@@ -26,3 +26,34 @@
 
 ##### Перезапустила докер контейнер через `docker restart [container_id|container_name]` и проверила любым способом, что контейнер запустился
 ![docker restart](screen/1.5.png)<br>*docker restart*<br>
+
+## Part 2. Операции с контейнером
+
+##### Прочитала конфигурационный файл *nginx.conf* внутри докер образа через команду *exec*
+![docker exec](screen/2.png)<br>*docker exec*<br>
+
+##### Создала на локальной машине файл *nginx.conf*
+![nginx.conf](screen/2.1.png)<br>*nginx.conf*<br>
+
+##### Настроила в нем по пути */status* отдачу страницы статуса сервера **nginx**
+![/status](screen/2.2.png)<br>*/status*<br>
+
+##### Скопировала созданный файл *nginx.conf* внутрь докер образа через команду `docker cp` и перезапустила **nginx** внутри докер образа через команду *exec*
+![docker cp && reload](screen/2.3.png)<br>*docker cp && reload*<br>
+
+##### Проверила, что по адресу *localhost:80/status* отдается страничка со статусом сервера **nginx**
+![localhost:8080/status](screen/2.4.png)<br>*localhost:8080/status*<br>
+
+##### Экспортировала контейнер в файл *container.tar* через команду *export*, остановила контейнер и удалила образ через `docker rmi [image_id|repository]`, не удаляя перед этим контейнеры
+![docker rmi](screen/2.5.png)<br>*docker rmi*<br>
+![docker rmi](screen/2.6.png)<br>*docker rmi*<br>
+
+
+##### Удалила остановленный контейнер
+##### Импортировала контейнер обратно через команду *import*, запустила импортированный контейнер
+![docker system prune -a](screen/2.7.png)<br>*docker system prune -a*<br>
+![docker](screen/2.8.png)<br>*docker*<br>
+
+##### Проверила, что по адресу *localhost:80/status* отдается страничка со статусом сервера **nginx**
+![localhost:80/status](screen/2.9.png)<br>*localhost:80/status*<br>
+![localhost:80/status](screen/2.10.png)<br>*localhost:80/status*<br>
