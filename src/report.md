@@ -84,3 +84,27 @@
 ![localhost:81](screen/3.9.png)<br>*localhost:81*<br>
 
 ##### Положила файл *nginx.conf* по пути *./nginx/nginx.conf* (это понадобится позже)
+
+## Part 4. Свой докер
+
+#### Написала свой докер образ, который:
+##### 1) собирает исходники мини сервера на FastCgi из [Части 3](#part-3-мини-веб-сервер)
+##### 2) запускает его на 8080 порту
+##### 3) копирует внутрь образа написанный *./nginx/nginx.conf*
+##### 4) запускает **nginx**.
+
+##### Собрала написанный докер образ через `docker build` при этом указав имя и тег
+![sudo docker build -t myserver:new .](screen/4.png)<br>*sudo docker build -t myserver:new .*<br>
+
+##### Проверила через `docker images`, что все собралось корректно
+![docker images](screen/4.1.png)<br>*docker images*<br>
+
+##### Запустила собранный докер образ с маппингом 81 порта на 80 на локальной машине и маппингом папки *./nginx* внутрь контейнера по адресу, где лежат конфигурационные файлы **nginx**'а (см. [Часть 2](#part-2-операции-с-контейнером)) и проверила, что по localhost:80 доступна страничка написанного мини сервера
+![curl localhost:80](screen/4.2.png)<br>*curl localhost:80*<br>
+![curl](screen/4.0.2.png)<br>*curl*<br>
+![localhost:80](screen/4.2.2.png)<br>*localhost:80*<br>
+
+##### Дописала в *./nginx/nginx.conf* проксирование странички */status*, по которой надо отдавать статус сервера **nginx**
+##### Перезапустила докер образ и проверила, что теперь по *localhost:80/status* отдается страничка со статусом **nginx**
+![curl localhost:80/status](screen/4.3.png)<br>*curl localhost:80/status*<br>
+![localhost:80/status](screen/4.4.png)<br>*localhost:80/status*<br>
